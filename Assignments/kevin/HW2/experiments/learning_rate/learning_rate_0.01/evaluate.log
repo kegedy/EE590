@@ -1,0 +1,4 @@
+2022-05-07 16:30:48,960:INFO: Creating the dataset...
+2022-05-07 16:30:49,065:INFO:  Done 
+2022-05-07 16:30:49,076:INFO: Starting evaluation
+2022-05-07 16:30:53,221:INFO: - Eval metrics : accuracy: 0.847 ; loss: 117.381

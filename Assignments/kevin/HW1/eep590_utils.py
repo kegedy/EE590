@@ -183,7 +183,7 @@ def load_data_fashion_mnist(batch_size, resize=None):
 def accuracy(y_hat, y):
     """Compute the number of correct predictions."""
     if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
-        y_hat = argmax(y_hat, axis=1)
+        y_hat = argmax(y_hat)
     cmp = astype(y_hat, y.dtype) == y
     return float(reduce_sum(astype(cmp, y.dtype)))
 
@@ -315,7 +315,7 @@ size = lambda x, *args, **kwargs: x.numel(*args, **kwargs)
 reshape = lambda x, *args, **kwargs: x.reshape(*args, **kwargs)
 to = lambda x, *args, **kwargs: x.to(*args, **kwargs)
 reduce_sum = lambda x, *args, **kwargs: x.sum(*args, **kwargs)
-argmax = lambda x, *args, **kwargs: x.argmax(*args, **kwargs)
+argmax = lambda x, *args: x.argmax(*args)
 astype = lambda x, *args, **kwargs: x.type(*args, **kwargs)
 transpose = lambda x, *args, **kwargs: x.t(*args, **kwargs)
 
