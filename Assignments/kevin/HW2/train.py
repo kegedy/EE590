@@ -45,7 +45,7 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
         num_steps: (int) number of batches to train on, each of size params.batch_size
     """
 
-    # TODO: 
+    # TODO: DONE
     # Set model to training mode
     model.train()
 

@@ -51,20 +51,28 @@ def load_dataset(path_csv):
        TODO: DONE
        Loads dataset into memory from csv file
     """
-    with open(path_csv) as f:
-        csv_file = csv.reader(f)
+    with open(path_csv, encoding="windows-1252") as f:
+        csv_file = csv.reader(f, delimiter=',')
         dataset = []
-        words, labels = [], []
+        sentences = []
+        labels = []
 
-        # Each line of the csv corresponds to one word
+        # Iterate through each row
         for i, row in enumerate(csv_file):
             if i == 0: 
                 continue
-            sentence, word, pos, label = row
-            if len(sentence) != 0:
-                if len(words) > 0:
-                    dataset.append((words, labels))
-                    words, labels = [], []
+            sentence, word, pos, tag = row
+            # Add to dataset
+            if len(sentence) > 0 and len(sentences) > 0:
+                dataset.append((sentences, labels))
+                sentences = []
+                labels = []
+            # Parse
+            word = str(word)
+            tag = str(tag)
+            sentences.append(word)
+            labels.append(tag)
+            
     return dataset
 
 
@@ -84,12 +92,12 @@ def save_dataset(dataset, save_dir):
 
     # TODO: DONE
     # Export the dataset
-    with open(f'{save_dir}/sentences.txt', 'w') as sentences:
-        with open(f"{save_dir}/labels.txt", 'w') as labels:
-            for words, labels in dataset:
-                sentences.write("{}\n".format(" ".join(words)))
-                labels.write("{}\n".format(" ".join(labels)))
-    print("- done.")
+    with open(f'{save_dir}/sentences.txt', 'w') as sfile:
+        with open(f'{save_dir}/labels.txt', 'w') as lfile:
+            for sentences, labels in dataset:
+                sfile.write("{}\n".format(" ".join(sentences)))
+                lfile.write("{}\n".format(" ".join(labels)))
+    print("saving")
 
 
 if __name__ == "__main__":

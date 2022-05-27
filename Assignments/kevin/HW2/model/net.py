@@ -76,27 +76,27 @@ class Net(nn.Module):
 
         Note: the dimensions after each step are provided
         """
-        # TODO
+        # TODO: DONE
         # s dimension -> batch_size x seq_len
         # apply the embedding layer that maps each token to its embedding
         # dim: batch_size x seq_len x embedding_dim
         s = self.embedding(s)
 
-        # TODO
+        # TODO: DONE
         # run the LSTM along the sentences of length seq_len
         # dim: batch_size x seq_len x lstm_hidden_dim
-        s, _ = self.lstm(s)
+        s, (hn, cn) = self.lstm(s)
 
-        # TODO
+        # TODO: DONE
         # make the Variable contiguous in memory (a PyTorch artefact)
         s = s.contiguous()
 
-        # TODO
+        # TODO: DONE
         # reshape the Variable so that each row contains one token
         # dim: batch_size*seq_len x lstm_hidden_dim
         s = s.view(-1, s.shape[2])
 
-        # TODO
+        # TODO: DONE
         # apply the fully connected layer and obtain the output (before softmax) for each token
         # dim: batch_size*seq_len x num_tags
         s = self.fc(s)                  
@@ -139,8 +139,8 @@ def loss_fn(outputs, labels):
     # TODO: DONE
     # compute cross entropy loss for all tokens (except padding tokens), by multiplying with mask.
     dim0 = outputs.shape[0]
-    loss = -torch.sum(outputs[:dim0, labels] * mask) / num_tokens
-    return loss
+    loss = torch.sum(outputs[:dim0, labels] * mask) / num_tokens
+    return -1 * loss
 
 
 def accuracy(outputs, labels):
@@ -167,7 +167,7 @@ def accuracy(outputs, labels):
     # TODO: DONE
     # compare outputs with labels and divide by number of tokens (excluding padding tokens)
     num_tokens = float(np.sum(mask))
-    return np.sum(outputs == labels)/num_tokens
+    return np.sum(outputs == labels) / num_tokens
 
 
 # maintain all metrics required in this dictionary- these are used in the training and evaluation loops

@@ -41,3 +41,7 @@
 2022-05-07 16:12:13,431:INFO: - Train metrics: accuracy: 0.848 ; loss: 124.900
 2022-05-07 16:12:24,791:INFO: - Eval metrics : accuracy: 0.846 ; loss: 120.260
 2022-05-07 16:12:24,860:INFO: - Found new best accuracy
+2022-05-08 23:57:42,055:INFO: Loading the datasets...
+2022-05-08 23:57:42,359:INFO: - done.
+2022-05-08 23:57:42,369:INFO: Starting training for 10 epoch(s)
+2022-05-08 23:57:42,369:INFO: Epoch 1/10
